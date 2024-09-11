@@ -1,0 +1,16 @@
+# .gitignore
+# Simon Hulse
+# simonhulse@protonmail.com
+# Last Edited: Tue 10 Sep 2024 11:35:14 PM EDT
+
+# Haskell
+dist-newstyle/
+
+# Python
+__pycache__/
+.coverage
+*.egg-info/
+.venv/
+
+# Rust
+target/

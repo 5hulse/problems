@@ -1,0 +1,61 @@
+[build-system]
+requires = [
+    "setuptools>42",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "leetcode"
+version = "1.0.0"
+authors = [
+    {name = "Simon Hulse", email = "simonhulse@protonmail.com"}
+]
+license = {file = "LICENSE"}
+# keywords = [
+#     ...
+# ]
+description = ""
+readme = "README.rst"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+# dependencies = [
+#     ...
+# ]
+
+[project.optional-dependencies]
+dev = [
+    "flake8-pyproject",
+    "pytest",
+    "pytest-cov",
+]
+docs = [
+    "Sphinx",
+    "furo",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q -s --cov=src/leetcode/ --cov-config=.coveragerc --cov-report html"
+testpaths = ["tests"]
+
+[tool.flake8]
+ignore = [
+    "E203",
+    "E731",
+    "E741",
+    "W504",
+]
+per_file_ignores = [
+    "src/leetcode/__init__.py: E402,F401",
+]
+max-line-length = 88
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+]
