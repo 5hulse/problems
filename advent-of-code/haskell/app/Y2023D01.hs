@@ -1,3 +1,8 @@
+-- app/Y2023D01.hs
+-- Simon Hulse
+-- simonhulse@protonmail.com
+-- Last Edited: Wed 18 Sep 2024 12:47:28 PM EDT
+
 module Y2023D01 ( year2023day01 ) where
 
 import qualified Utils
