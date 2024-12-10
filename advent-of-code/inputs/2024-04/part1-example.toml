@@ -1,0 +1,18 @@
+# ../inputs/2024-04/part1-example.toml
+# Simon Hulse
+# simonhulse@protonmail.com
+# Last Edited: Tue 10 Dec 2024 03:43:42 PM EST
+
+input = """
+MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX
+"""
+output = 18
