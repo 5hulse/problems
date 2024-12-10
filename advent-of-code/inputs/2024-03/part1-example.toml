@@ -1,0 +1,7 @@
+# ../inputs/2024-03/part1-example.toml
+# Simon Hulse
+# simonhulse@protonmail.com
+# Last Edited: Tue 10 Dec 2024 01:44:37 PM EST
+
+input = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
+output = 161

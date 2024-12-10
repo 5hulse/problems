@@ -1,0 +1,7 @@
+# ../inputs/2024-03/part2-example.toml
+# Simon Hulse
+# simonhulse@protonmail.com
+# Last Edited: Tue 10 Dec 2024 01:53:28 PM EST
+
+input = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+output = 48
