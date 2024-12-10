@@ -1,7 +1,7 @@
 //src/main/java/org/simonhulse/aoc/Y2024D02Solution.java
 //Simon Hulse
 //simonhulse@protonmail.com
-//Last Edited: Tue 10 Dec 2024 11:47:03 AM EST
+//Last Edited: Tue 10 Dec 2024 01:32:09 PM EST
 
 package org.simonhulse.aoc;
 
@@ -9,20 +9,15 @@ import java.util.*;
 
 class Level {
     private int[] diffs;
-    private int[] values;
-    private int nValues;
+    private int nDiffs;
 
     public Level(String input) {
         String[] valuesStr = input.split(" ");
-        nValues = valuesStr.length;
-        values = new int[nValues];
-        diffs = new int[nValues - 1];
-
-        for (int i = 0; i < nValues - 1; i++) {
+        nDiffs = valuesStr.length - 1;
+        diffs = new int[nDiffs];
+        for (int i = 0; i < nDiffs; i++) {
             diffs[i] = Integer.parseInt(valuesStr[i + 1]) - Integer.parseInt(valuesStr[i]);
-            values[i] = Integer.parseInt(valuesStr[i]);
         }
-        values[nValues - 1] = Integer.parseInt(valuesStr[nValues - 1]);
     }
 
     private boolean inRange(int x, int lo, int hi) {
@@ -37,39 +32,66 @@ class Level {
         return count;
     }
 
-    private int getProblemIdx(int lo, int hi) {
-        int problemIdx = 0;
+    private int getProblemIndex(int lo, int hi) {
+        int idx = 0;
         while (true) {
-            if (!inRange(diffs[problemIdx], lo, hi)) {
-                break;
-            }
-            problemIdx++;
+            if (!inRange(diffs[idx], lo, hi)) break;
+            idx++;
         }
-        return problemIdx;
+        return idx;
     }
 
-    private boolean safeAfterRemoval(boolean nValid, int lo, int hi) {
-        int idx = getProblemIdx(lo, hi);
-        if ((idx > 0) && inRange(diffs[idx - 1] + diffs[idx], lo, hi)) return true;
-        if ((idx < nValues - 2) && (inRange(diffs[idx] + diffs[idx + 1], lo, hi))) return true;
-        return false;
+    private int[] getProblemIndices(int lo, int hi) {
+        int[] idxs = new int[2];
+        int count = 0;
+        int i = 0;
+        while (count < 2) {
+            if (!inRange(diffs[i], lo, hi)) {
+                idxs[count] = i;
+                count++;
+            }
+            i++;
+        }
+        return idxs;
     }
 
     public boolean isSafePartOne() {
-        return ((nBetween(diffs, 1, 3) == nValues - 1) || (nBetween(diffs, -3, -1) == nValues - 1));
+        return ((nBetween(diffs, 1, 3) == nDiffs) || (nBetween(diffs, -3, -1) == nDiffs));
     }
 
     public boolean isSafePartTwo() {
         int nAscending = nBetween(diffs, 1, 3);
         int nDescending = nBetween(diffs, -3, -1);
 
-        if (nAscending == nValues - 1 || nDescending == nValues - 1) return true;
-        if (nAscending == nValues - 2 || nAscending == nValues - 3) {
-            if (safeAfterRemoval(nAscending, 1, 3)) {
-                return true;
-            }
+        if (nAscending == nDiffs || nDescending == nDiffs) return true;
+
+        if (nAscending == nDiffs - 1) {
+            int idx = getProblemIndex(1, 3);
+            if (idx == 0) return true;
+            if (idx == nDiffs - 1) return true;
+            if (inRange(diffs[idx - 1] + diffs[idx], 1, 3)) return true;
+            if (idx < nDiffs - 1 && inRange(diffs[idx] + diffs[idx + 1], 1, 3)) return true;
         }
-        if (nDescending == nValues - 2 || nDescending == nValues - 3) return safeAfterRemoval(-3, -1);
+
+        if (nDescending == nDiffs - 1) {
+            int idx = getProblemIndex(-3, -1);
+            if (idx == 0 || idx == nDiffs - 1) return true;
+            if (inRange(diffs[idx - 1] + diffs[idx], -3, -1)) return true;
+            if (idx < nDiffs - 1 && inRange(diffs[idx] + diffs[idx + 1], -3, -1)) return true;
+        }
+
+        if (nAscending == nDiffs - 2) {
+            int[] idxs = getProblemIndices(1, 3);
+            if (idxs[0] + 1 != idxs[1]) return false;
+            if (inRange(diffs[idxs[0]] + diffs[idxs[1]], 1, 3)) return true;
+        }
+
+        if (nDescending == nDiffs - 2) {
+            int[] idxs = getProblemIndices(-3, -1);
+            if (idxs[0] + 1 != idxs[1]) return false;
+            if (inRange(diffs[idxs[0]] + diffs[idxs[1]], -3, -1)) return true;
+        }
+
         return false;
     }
 }
