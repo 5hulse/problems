@@ -1,7 +1,7 @@
 //src/main/java/org/simonhulse/aoc/Y2024D04Solution.java
 //Simon Hulse
 //simonhulse@protonmail.com
-//Last Edited: Tue 10 Dec 2024 04:57:00 PM EST
+//Last Edited: Wed 11 Dec 2024 11:02:44 AM EST
 
 package org.simonhulse.aoc;
 
@@ -136,7 +136,6 @@ public class Y2024D04Solution extends AOCSolution {
         result += wordSearch.colSearch();
         result += wordSearch.forwardDiagonalSearch();
         result += wordSearch.backwardDiagonalSearch();
-        System.out.println(String.format("result: %s", result));
         return result;
     };
 
